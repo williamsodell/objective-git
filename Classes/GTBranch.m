@@ -122,7 +122,7 @@
 }
 
 - (NSString *)remoteName {
-	if (self.branchType == GTBranchTypeLocal || ![self.reference isValid]) return nil;
+	if (![self.reference isValid] || self.branchType == GTBranchTypeLocal) return nil;
 
 	const char *name;
 	int gitError = git_branch_name(&name, self.reference.git_reference);
@@ -198,15 +198,15 @@
 }
 
 - (GTBranch *)trackingBranchWithError:(NSError **)error success:(BOOL *)success {
-	if (self.branchType == GTBranchTypeRemote) {
-		if (success != NULL) *success = YES;
-		return self;
-	}
-
 	if (!self.reference.valid) {
 		if (success != NULL) *success = NO;
 		if (error != NULL) *error = GTReference.invalidReferenceError;
 		return NO;
+	}
+
+	if (self.branchType == GTBranchTypeRemote) {
+		if (success != NULL) *success = YES;
+		return self;
 	}
 
 	git_reference *trackingRef = NULL;
