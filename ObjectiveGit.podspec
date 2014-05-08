@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '5.0'
   s.osx.deployment_target = '10.6'
 
-  s.dependency 'libgit2', '0.18.0beta0'
+  s.dependency 'libgit2', :git => 'https://github.com/williamsodell/libgit2', :branch => 'compatibility-updates'
 
   s.prefix_header_contents = '#define GTLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);'
  
