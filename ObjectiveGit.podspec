@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.prepare_command = <<-CMD
 	./script/bootstrap
 	./script/update_libgit2
-	cp Externals/libgit2/include Headers
+	cp External/libgit2/include Headers
   CMD
 
   s.private_header_files = 'Headers/**/*.h'
