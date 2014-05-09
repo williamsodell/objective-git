@@ -7,14 +7,12 @@ Pod::Spec.new do |s|
   s.author        =  { "Tim Clem" => "timothy.clem@gmail.com", "Josh Abernathy" => "josh@github.com" }
   s.source        =  { :git => "https://github.com/libgit2/objective-git.git", :tag => "0.1", :submodules => true }
   s.source_files  =  'Classes/**/*.{h,m}'
-  s.osx.libraries =  %w|ssl crypto z|
-  s.ios.libraries =  %w|z|
+  s.osx.libraries =  %w|ssl crypto z libgit2|
+  s.ios.libraries =  %w|z libgit2|
   s.requires_arc  =  true
 
   s.ios.deployment_target = '5.0'
   s.osx.deployment_target = '10.6'
-
-  s.dependency 'libgit2'
 
   s.prefix_header_contents = '#define GTLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);'
  
