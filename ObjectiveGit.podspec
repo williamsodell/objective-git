@@ -6,12 +6,20 @@ Pod::Spec.new do |s|
   s.license       =  'MIT'
   s.author        =  { "Tim Clem" => "timothy.clem@gmail.com", "Josh Abernathy" => "josh@github.com" }
   s.source        =  { :git => "https://github.com/libgit2/objective-git.git", :tag => "0.1", :submodules => true }
-  s.source_files  =  'Classes/**/*.{h,m}'
+  s.source_files  =  'Classes/**/*.{h,m}', 'Headers/**/*.h'
   s.osx.libraries =  %w|ssl crypto z libgit2|
   s.ios.libraries =  %w|z libgit2|
   s.requires_arc  =  true
 
-  s.prepare_command = './script/bootstrap'
+  s.prepare_command = <<-CMD
+	./script/bootstrap
+	./script/update_libgit2
+	cp Externals/libgit2/include Headers
+  CMD
+
+  s.private_header_files = 'Headers/**/*.h'
+
+  s.vendored_library = 'External/libgit2.a'
 
   s.ios.deployment_target = '5.0'
   s.osx.deployment_target = '10.6'
