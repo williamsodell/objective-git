@@ -11,6 +11,8 @@ Pod::Spec.new do |s|
   s.ios.libraries =  %w|z libgit2|
   s.requires_arc  =  true
 
+  s.prepare_command = './script/bootstrap'
+
   s.ios.deployment_target = '5.0'
   s.osx.deployment_target = '10.6'
 
